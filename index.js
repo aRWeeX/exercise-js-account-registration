@@ -1,6 +1,11 @@
-// Focus the input under the respective form > label > fieldset when clicking on the label.
 const labelEls = document.querySelectorAll("form > label");
+const inputs = document.querySelectorAll("fieldset > input");
+const submitBtn = document.querySelector(".submit-button");
+const password = document.querySelector("input[name=password]");
+const confirmPassword = document.querySelector("input[name=confirm-password]");
+const form = document.querySelector("form");
 
+// Focus the input field when clicking on the label.
 labelEls.forEach((el) => {
   el.addEventListener("click", () => {
     const input = el.querySelector("fieldset > input");
@@ -8,14 +13,7 @@ labelEls.forEach((el) => {
   });
 });
 
-/* Enables or disables the "Submit" button based on the values of a collection of input fields.
-   Ensures that the password is at least 8 characters long. */
-const inputs = document.querySelectorAll("fieldset > input");
-const submitBtn = document.querySelector(".submit-button");
-const password = document.querySelector("input[name=password]");
-const confirmPassword = document.querySelector("input[name=confirm-password]");
-const form = document.querySelector("form");
-
+// Password has to be at least 8 characters long.
 function validatePassword() {
   if (password.value.length < 8) {
     password.classList.add("invalid");
@@ -26,6 +24,7 @@ function validatePassword() {
   }
 }
 
+// Password and confirm password has to match.
 function validateConfirmPassword() {
   if (confirmPassword.value === password.value) {
     confirmPassword.classList.add("valid");
@@ -36,6 +35,7 @@ function validateConfirmPassword() {
   }
 }
 
+// Check that all input fields are filled in.
 function areInputsValid() {
   return (
     Array.from(inputs).every((input) => input.value.trim() !== "") &&
@@ -44,6 +44,7 @@ function areInputsValid() {
   );
 }
 
+// Enable or disable the "Submit" button based on whether all input fields are filled.
 function toggleSubmitButtonState() {
   const isDisabled = !areInputsValid();
   submitBtn.disabled = isDisabled;
@@ -55,11 +56,13 @@ function toggleSubmitButtonState() {
   }
 }
 
+// Remove the "DOMContentLoaded" event listener after use.
 function onDOMContentLoaded() {
   toggleSubmitButtonState();
   document.removeEventListener("DOMContentLoaded", onDOMContentLoaded);
 }
 
+// Collect all the input fields' values and store them in an object.
 function collectInputValues() {
   if (!areInputsValid()) {
     return null;
@@ -79,6 +82,7 @@ function collectInputValues() {
   return inputData;
 }
 
+// Add an "input" event listener to each input field.
 inputs.forEach((input) => {
   input.addEventListener("input", () => {
     if (input === password) {
@@ -91,6 +95,7 @@ inputs.forEach((input) => {
   });
 });
 
+// Add a "submit" event listener to the form.
 form.addEventListener("submit", (event) => {
   event.preventDefault();
 
@@ -104,6 +109,7 @@ form.addEventListener("submit", (event) => {
   toggleSubmitButtonState();
 });
 
+// Add a "DOMContentLoaded" event listener based on whether the DOM has loaded or not.
 if (document.readyState === "loading") {
   document.addEventListener("DOMContentLoaded", onDOMContentLoaded);
 } else {
