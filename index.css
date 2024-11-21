@@ -1,0 +1,185 @@
+/* 1. Use a more-intuitive box-sizing model */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/* 2. Remove default margin */
+* {
+  margin: 0;
+}
+
+body {
+  /* 3. Add accessible line-height */
+  line-height: 1.5;
+  /* 4. Improve text rendering */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 5. Improve media defaults */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* 6. Inherit fonts for form controls */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+/* 7. Avoid text overflows */
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+/* 8. Improve line wrapping */
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+/* 9. Create a root stacking context */
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/*
+  My CSS
+
+  https://www.joshwcomeau.com/css/custom-css-reset/
+
+  https://www.figma.com/colors/blue-gray/
+  
+*/
+:root {
+  --primary-dark: #384959;
+  --secondary-muted: #6a89a7;
+  --highlight-bright: #88bdf2;
+  --light-accent: #bdddfc;
+
+  --highlight-hover: #78add8;
+
+  --placeholder-text: #c5d8e2;
+}
+
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: var(--light-accent);
+}
+
+h1 {
+  font-size: 2.25rem;
+  font-weight: bold;
+}
+
+fieldset {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  border: 1.5px solid var(--highlight-bright);
+  border-radius: 0.25rem;
+  margin: 1rem 0;
+  padding: 1rem;
+  position: relative;
+}
+
+fieldset > legend {
+  position: absolute;
+  top: -0.75rem;
+  left: 1rem;
+
+  background-color: var(--secondary-muted);
+  font-weight: 550;
+  padding: 0 0.25rem;
+}
+
+input {
+  background-color: var(--secondary-muted);
+  border: 0;
+}
+
+input:focus {
+  outline: none;
+}
+
+input::placeholder {
+  color: var(--placeholder-text);
+}
+
+input[name="password"] {
+  background-color: var(--secondary-muted);
+  transition: background-color 0.5s ease, box-shadow 0.3s ease;
+}
+
+input.invalid {
+  background-color: rgba(255, 0, 0, 0.15);
+  box-shadow: 0 0 0.5rem rgba(255, 0, 0, 0.3);
+}
+
+input.valid {
+  background-color: rgba(0, 255, 0, 0.1);
+  box-shadow: 0 0 0.5rem rgba(0, 255, 0, 0.2);
+}
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background-color: var(--primary-dark);
+  height: 100vh;
+}
+
+.content-container {
+  background-color: var(--secondary-muted);
+  border-radius: 0.5rem;
+  height: fit-content;
+  padding: 1rem;
+}
+
+.submit-button {
+  background-color: var(--highlight-bright);
+  border-radius: 0.25rem;
+  color: var(--primary-dark);
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+}
+
+.submit-button:hover {
+  background-color: var(--highlight-hover);
+}
+
+.submit-button.disabled {
+  cursor: not-allowed;
+}
+
+.submit-button.disabled:hover {
+  background-color: var(--highlight-bright);
+}
